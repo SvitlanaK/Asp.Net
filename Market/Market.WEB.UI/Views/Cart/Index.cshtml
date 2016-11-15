@@ -1,0 +1,50 @@
+﻿@model Market.WEB.UI.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Дом Чая: Корзина";
+}
+<style>
+    #cartTable td{vertical-align: middle;}
+</style>
+<h2>Корзина</h2>
+<table id="cartTable" class="table">
+    <thead>
+        <tr>
+            <th>Количество</th>
+            <th>Товар</th>
+            <th class="text-right">Цена</th>
+            <th class="text-right">И того</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var line in Model.cart.Lines)
+        {
+            <tr>
+                <td class="text-center">@line.Quantity</td>
+                <td class="text-left">@line.Product.Name</td>
+                <td class="text-right">@line.Product.Price</td>
+                <td class="text-right">@((line.Quantity *line.Product.Price).ToString("c"))</td>
+           <td>
+               @using (Html.BeginForm("RemoveFromCart", "Cart"))
+               {
+                   @Html.Hidden("ProductID", line.Product.ProductID)
+                   @Html.HiddenFor(x=>x.ReturnURL)
+                   <input class="btn btn-sm btn-warning" type="submit" value="Удалить" />
+
+               }
+           </td>
+             </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">И того:</td>
+            <td class="text-right">@Model.cart.ComputeTotalVAlue().ToString("c")</td>
+        </tr>
+    </tfoot>
+</table>
+<div class="text-center">
+    <a class="btn btn-primary" href="@Model.ReturnURL">Продолжить покупки</a>
+@Html.ActionLink("Завершить заказ", "Checkout", null, new { @class="btn btn-primary"})
+</div>
+

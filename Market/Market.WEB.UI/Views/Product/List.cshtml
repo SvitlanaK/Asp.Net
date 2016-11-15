@@ -1,0 +1,20 @@
+﻿@model Market.WEB.UI.Models.ProductListViewModel
+
+@{
+    ViewBag.Title = "Tee";
+}
+
+@foreach(var p in Model.Products){
+    @Html.Partial("ProductSummary", p)
+    }
+
+
+
+   <div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagInfo, x => Url.Action("List", new
+{
+    page = x
+}))
+</div>
+
+

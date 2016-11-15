@@ -1,0 +1,30 @@
+﻿@model Market.WEB.UI.Models.LoginViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "LOG IN";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3>LOG IN</h3>
+    </div>
+    <div class="panel-body">
+        <p class="lead">Введити логин что бы перейти в отдель администрирования</p>
+                @using (Html.BeginForm())
+                {
+                    
+                        @Html.ValidationSummary()
+                        <div class="form-group">
+                            <label>Логин: </label>
+
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Пароль: </label>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        </div>
+                        <input type="submit" value="Войти" class="btn btn-primary" />
+                   
+                }
+</div>
+</div>

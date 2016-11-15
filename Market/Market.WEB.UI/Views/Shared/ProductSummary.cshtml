@@ -1,0 +1,37 @@
+﻿@model Market.Domain.Entities.Product
+
+<div class="row  well">
+   <div class="col-sm-12">
+            @if (Model.ImageData != null)
+            {
+            <div class="pull-left" style="margin-right: 10px">
+                <img class="img-thumbnail" width="375" height="375"
+                     src="@Url.Action("GetImage", "Product", new { Model.ProductID })" />
+            </div>
+        }
+
+        <h3><strong>@Model.Name</strong></h3>
+
+
+        <p> @Model.Description</p>
+        <h5>
+            <span class="pull-right label label-warning">
+                @Model.Price.ToString("c")
+            </span>
+        </h5>
+        @using (Html.BeginForm("AddToCart", "Cart"))
+            {
+            <div class="pull-left">
+                @Html.HiddenFor(x => x.ProductID)
+                @Html.Hidden("returnURL", Request.Url.PathAndQuery)
+                <input type="submit" class="btn btn-success" value="Добавить в корзину" />
+            </div>
+        }
+       
+    </div>
+    
+</div>
+
+
+
+

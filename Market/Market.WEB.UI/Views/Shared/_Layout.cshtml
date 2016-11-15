@@ -1,0 +1,28 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чайная лавка</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="navbar navbar-inverse">
+        <div class="SW">   @Html.Action("Summary", "Cart")</div> 
+    </div>
+    <div class="row panel">
+        <div id="categories" class="col-xs-3">
+            @Html.Action("Menu","Nav")
+        </div>
+        <div class="row">
+        <div class="col-xs-8">
+            @RenderBody()
+        </div>
+            </div>
+    </div>
+   
+</body>
+</html>

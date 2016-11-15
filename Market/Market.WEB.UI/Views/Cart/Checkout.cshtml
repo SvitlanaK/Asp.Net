@@ -1,0 +1,35 @@
+﻿@model Market.Domain.Entities.ShopingDetails
+
+@{
+    ViewBag.Title = "Дом чая: Оформление заказа";
+}
+
+<h2>Оформление заказа</h2>
+<p>Пожалуйста введите ваши данные и проверте их перед подтверждением заказа</p>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <h3>Заказ</h3>
+    <div class="form-group">
+        <label>Имя:</label>
+        @Html.TextBoxFor(x=>x.Name, new { @class="form-control"})
+    </div>
+    <h3>Адрес</h3>
+
+    foreach(var property in ViewData.ModelMetadata.Properties) {
+        if(property.PropertyName != "Name" && property.PropertyName != "GiftWrap") {
+            <div class="form-group">
+                <label>@(property.DisplayName ?? property.PropertyName)</label>
+            @Html.TextBox(property.PropertyName, null, new { @class="form-control"})
+            </div>
+       }
+   }
+    <h3>Подарочная упаковка</h3>
+    <div class="checkbox">
+        <label>@Html.EditorFor(x=>x.GiftWrap)</label>
+    </div>
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="Подтвердить заказ" />
+    </div>
+}
+
